@@ -95,6 +95,22 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "CHECKBOX",
+        "name": "fileDownloads",
+        "checkboxText": "File Downloads",
+        "simpleValueType": true,
+        "defaultValue": true,
+        "help": "Whether to track file downloads. Defaults to true."
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "formSubmissions",
+        "checkboxText": "Form Submissions",
+        "simpleValueType": true,
+        "help": "Whether to track form submissions. Defaults to true.",
+        "defaultValue": true
+      },
+      {
+        "type": "CHECKBOX",
         "name": "hashBasedRouting",
         "checkboxText": "Hash Based Routing",
         "simpleValueType": true,
@@ -106,6 +122,14 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Logging",
         "simpleValueType": true,
         "help": "Whether to log on ignored events. Defaults to true.",
+        "defaultValue": true
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "outboundLinks",
+        "checkboxText": "Outbound Links",
+        "simpleValueType": true,
+        "help": "Whether to track outbound link clicks. Defaults to true.",
         "defaultValue": true
       }
     ]
@@ -174,8 +198,11 @@ const plausibleInit = () => {
   let initProps = {
     autoCapturePageviews: data.autoCapturePageviews,
     captureOnLocalhost: data.captureOnLocalhost,
+    fileDownloads: data.fileDownloads,
+    formSubmissions: data.formSubmissions,
     hashBasedRouting: data.hashBasedRouting,
     logging: data.logging,
+    outboundLinks: data.outboundLinks,
     lib: 'gtm'
   };
 
@@ -400,4 +427,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 7/4/2025, 1:43:20 PM
+Created on 8/15/2025, 4:08:31 PM
+
+
