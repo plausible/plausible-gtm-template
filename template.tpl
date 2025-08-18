@@ -175,7 +175,8 @@ const plausibleInit = () => {
     autoCapturePageviews: data.autoCapturePageviews,
     captureOnLocalhost: data.captureOnLocalhost,
     hashBasedRouting: data.hashBasedRouting,
-    logging: data.logging
+    logging: data.logging,
+    lib: 'gtm'
   };
 
   if (customProps && customProps.length > 0) {
