@@ -202,7 +202,8 @@ const plausibleInit = () => {
     formSubmissions: data.formSubmissions,
     hashBasedRouting: data.hashBasedRouting,
     logging: data.logging,
-    outboundLinks: data.outboundLinks
+    outboundLinks: data.outboundLinks,
+    lib: 'gtm'
   };
 
   if (customProps && customProps.length > 0) {
