@@ -82,21 +82,6 @@ ___TEMPLATE_PARAMETERS___
     "subParams": [
       {
         "type": "CHECKBOX",
-        "name": "autoCapturePageviews",
-        "checkboxText": "Auto Capture Pageviews",
-        "simpleValueType": true,
-        "help": "Whether to automatically capture pageviews. Defaults to true.",
-        "defaultValue": true
-      },
-      {
-        "type": "CHECKBOX",
-        "name": "captureOnLocalhost",
-        "checkboxText": "Capture on Localhost",
-        "simpleValueType": true,
-        "help": "Whether to capture events on localhost. Defaults to false."
-      },
-      {
-        "type": "CHECKBOX",
         "name": "fileDownloads",
         "checkboxText": "File Downloads",
         "simpleValueType": true,
@@ -113,6 +98,14 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "CHECKBOX",
+        "name": "outboundLinks",
+        "checkboxText": "Outbound Links",
+        "simpleValueType": true,
+        "help": "Whether to track outbound link clicks. Defaults to true.",
+        "defaultValue": true
+      },
+      {
+        "type": "CHECKBOX",
         "name": "hashBasedRouting",
         "checkboxText": "Hash Based Routing",
         "simpleValueType": true,
@@ -120,18 +113,25 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "CHECKBOX",
-        "name": "logging",
-        "checkboxText": "Logging",
+        "name": "autoCapturePageviews",
+        "checkboxText": "(Advanced) Auto Capture Pageviews",
         "simpleValueType": true,
-        "help": "Whether to log on ignored events. Defaults to true.",
+        "help": "Whether to automatically capture pageviews. Defaults to true.",
         "defaultValue": true
       },
       {
         "type": "CHECKBOX",
-        "name": "outboundLinks",
-        "checkboxText": "Outbound Links",
+        "name": "captureOnLocalhost",
+        "checkboxText": "(Advanced) Capture on Localhost",
         "simpleValueType": true,
-        "help": "Whether to track outbound link clicks. Defaults to true.",
+        "help": "Whether to capture events on localhost. Defaults to false."
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "logging",
+        "checkboxText": "(Advanced) Logging",
+        "simpleValueType": true,
+        "help": "Whether to log to console on ignored events. Defaults to true.",
         "defaultValue": true
       }
     ]
