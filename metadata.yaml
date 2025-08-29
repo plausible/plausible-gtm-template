@@ -1,5 +1,7 @@
 homepage: "https://plausible.io"
 documentation: "https://plausible.io/gtm-template"
 versions:
+  - sha: 5557eceabc9df02af2ea05731140f2777487074c
+    changeNotes: Reorder checkboxes
   - sha: ebb93fad08e642cbe4689784e10fd68cf414b800
     changeNotes: Initial release
