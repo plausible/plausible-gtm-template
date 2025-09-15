@@ -145,6 +145,7 @@ ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 const callInWindow = require('callInWindow');
 const copyFromWindow = require('copyFromWindow');
 const createArgumentsQueue = require('createArgumentsQueue');
+const encodeUri = require('encodeUri');
 const injectScript = require('injectScript');
 const log = require('logToConsole');
 const parseUrl = require('parseUrl');
@@ -193,7 +194,7 @@ if (scriptID && scriptID.length > 3 && scriptID.substring(scriptID.length - 3) =
 }
 
 
-const scriptSRC = "https://plausible.io/js/" + scriptID + ".js";
+const scriptSRC = "https://plausible.io/js/" + encodeUri(scriptID) + ".js";
 const customProps = data.customProps;
 
 const plausibleInit = () => {
