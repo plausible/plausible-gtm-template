@@ -1,6 +1,8 @@
 homepage: "https://plausible.io"
 documentation: "https://plausible.io/gtm-template"
 versions:
+  - sha: ef96542a1ce11e1e6b46c106b8f5e248580f6078
+    changeNotes: Fix potential issue with URL encoding
   - sha: 5557eceabc9df02af2ea05731140f2777487074c
     changeNotes: Reorder checkboxes
   - sha: ebb93fad08e642cbe4689784e10fd68cf414b800
