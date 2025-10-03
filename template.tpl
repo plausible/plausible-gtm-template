@@ -14,7 +14,9 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Plausible Analytics",
-  "categories": ["ANALYTICS"],
+  "categories": [
+    "ANALYTICS"
+  ],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -112,27 +114,35 @@ ___TEMPLATE_PARAMETERS___
         "help": "Whether the page uses hash based routing. Defaults to false.  Read more at https://plausible.io/docs/hash-based-routing"
       },
       {
-        "type": "CHECKBOX",
-        "name": "autoCapturePageviews",
-        "checkboxText": "(Advanced) Auto Capture Pageviews",
-        "simpleValueType": true,
-        "help": "Whether to automatically capture pageviews. Defaults to true.",
-        "defaultValue": true
-      },
-      {
-        "type": "CHECKBOX",
-        "name": "captureOnLocalhost",
-        "checkboxText": "(Advanced) Capture on Localhost",
-        "simpleValueType": true,
-        "help": "Whether to capture events on localhost. Defaults to false."
-      },
-      {
-        "type": "CHECKBOX",
-        "name": "logging",
-        "checkboxText": "(Advanced) Logging",
-        "simpleValueType": true,
-        "help": "Whether to log to console on ignored events. Defaults to true.",
-        "defaultValue": true
+        "type": "GROUP",
+        "name": "advancedOptions",
+        "displayName": "Advanced",
+        "groupStyle": "ZIPPY_CLOSED",
+        "subParams": [
+          {
+            "type": "CHECKBOX",
+            "name": "autoCapturePageviews",
+            "checkboxText": "Auto Capture Pageviews",
+            "simpleValueType": true,
+            "help": "Whether to automatically capture pageviews. Defaults to true.",
+            "defaultValue": true
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "captureOnLocalhost",
+            "checkboxText": "Capture on Localhost",
+            "simpleValueType": true,
+            "help": "Whether to capture events on localhost. Defaults to false."
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "logging",
+            "checkboxText": "Logging",
+            "simpleValueType": true,
+            "help": "Whether to log to console on ignored events. Defaults to true.",
+            "defaultValue": true
+          }
+        ]
       }
     ]
   }
