@@ -19,13 +19,14 @@ Alternatively, the template can be manually imported with the following steps:
 Once you’ve installed the template, either manually or through the template gallery, you should create a new Tag that uses it.  To do this:
 * In the main Google Tag Manager dashboard, browse to Tags and click New to create a new tag
 * From the list of available tag templates, choose the Plausible Analytics tag template you just installed
-* The only mandatory field in the tag configuration is the Script ID that can be found in the Plausible Analytics dashboard under Site Settings > Site Installation > Google Tag Manager (other optional configuration options are described below in the section Tag Configuration)
-* For the tag trigger, you should select All Pages - Page View, which will ensure that Plausible will capture data on all pages
+* Select 'Initialization' as the type
+* The only mandatory field in the initial tag configuration is the Script ID that can be found in the Plausible Analytics dashboard under Site Settings > Site Installation > Google Tag Manager (other optional configuration options are described below in the section Tag Configuration)
+* For the initial tag trigger, you should select 'All Pages - Page View', which will ensure that Plausible will capture data on all pages
 
 
 ## Tag Configuration
 
-The tag has the following optional configuration options:
+The initialization tag has the following optional configuration options:
 
 | **Optional Configuration** | **Explanation** |
 |---------------------------|-----------------|
@@ -33,10 +34,21 @@ The tag has the following optional configuration options:
 | **Capture on Localhost**      | Whether to capture events on localhost (disabled by default) |
 | **File Downloads**            | Automatically [track file downloads](https://plausible.io/docs/file-downloads-tracking) (enabled by default) |
 | **Form Submissions**          | Whether to track form submissions (enabled by default) |
-| **Hash Based Routing**        | Automatically track page paths that use a `#` in the URL, [described here](https://plausible.io/docs/hash-based-routing) (enabled by default) |
+| **Hash Based Routing**        | Automatically track page paths that use a `#` in the URL, [described here](https://plausible.io/docs/hash-based-routing) (disabled by default) |
 | **Logging**                   | Whether to log on ignored events (enabled by default) |
 | **Outbound Links**            | Automatically [track clicks on outbound links](https://plausible.io/docs/outbound-link-click-tracking) (enabled by default) |
-| **Custom Properties**         | Allows you to attach [custom properties](https://plausible.io/docs/custom-props/introduction) (also known as custom dimensions in Google Analytics) when sending a pageview event. These can be configured using Google Tag Manager variables. |
+| **Custom File Download Types** | Override the default file extensions for tracking file downloads, so only your custom file type downloads will be tracked instead (disabled by default) |
+| **404 Tracking**            | Whether to track 404 events using the title of the 404 page (disabled by default) |
+
+## Custom Events
+
+You can also create multiple tags to capture custom events that are linked to different triggers in GTM.  To do this, create a new tag (separate from the initialization tag) and select the 'Custom Event' type. The only mandatory field is 'Event Name' which is the name of the event that will be sent to Plausible.
+
+Optionally, you can configure [revenue tracking](https://plausible.io/docs/ecommerce-revenue-tracking) and add custom properties.
+
+## Custom Properties
+
+Both the Initialization Tag and the Custom Event Tags give you the option to configure one or more [custom properties](https://plausible.io/docs/custom-props/introduction).  In the case of the Initialization Tag, these custom properties will be attached to pageviews, while for Custom Events, they will be attached to that specific event.
 
 
 ## Testing

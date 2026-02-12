@@ -33,6 +33,22 @@ ___TEMPLATE_PARAMETERS___
 
 [
   {
+    "type": "RADIO",
+    "name": "type",
+    "displayName": "Type",
+    "radioItems": [
+      {
+        "value": "init",
+        "displayValue": "Initialization"
+      },
+      {
+        "value": "event",
+        "displayValue": "Custom Event"
+      }
+    ],
+    "simpleValueType": true
+  },
+  {
     "type": "TEXT",
     "name": "scriptID",
     "displayName": "Script ID",
@@ -41,46 +57,162 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "NON_EMPTY"
       }
+    ],
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "init",
+        "type": "EQUALS"
+      }
     ]
   },
   {
-    "type": "PARAM_TABLE",
-    "name": "customProps",
-    "displayName": "Custom Properties",
-    "paramTableColumns": [
+    "type": "TEXT",
+    "name": "customEvent",
+    "displayName": "Event Name",
+    "simpleValueType": true,
+    "enablingConditions": [
       {
-        "param": {
-          "type": "SELECT",
-          "name": "gtmVariable",
-          "displayName": "GTM Variable",
-          "macrosInSelect": true,
-          "selectItems": [],
-          "simpleValueType": true
-        },
-        "isUnique": false
+        "paramName": "type",
+        "paramValue": "event",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "customPropsGroup",
+    "displayName": "Custom Props",
+    "groupStyle": "NO_ZIPPY",
+    "subParams": [
+      {
+        "type": "PARAM_TABLE",
+        "name": "customProps",
+        "displayName": "",
+        "paramTableColumns": [
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "customPropName",
+              "displayName": "Custom Property Name",
+              "simpleValueType": true,
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                }
+              ]
+            },
+            "isUnique": true
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "customPropValue",
+              "displayName": "Custom Property Value",
+              "simpleValueType": true
+            },
+            "isUnique": false
+          }
+        ],
+        "newRowButtonText": "Add Custom Property",
+        "newRowTitle": "New Custom Property",
+        "editRowTitle": "Edit Custom Property"
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "404Options",
+    "displayName": "404 Tracking",
+    "groupStyle": "NO_ZIPPY",
+    "subParams": [
+      {
+        "type": "CHECKBOX",
+        "name": "404Tracking",
+        "checkboxText": "Enable 404 Tracking",
+        "simpleValueType": true,
+        "enablingConditions": []
       },
       {
-        "param": {
-          "type": "TEXT",
-          "name": "plausibleCustomProp",
-          "displayName": "Plausible Custom Property",
-          "simpleValueType": true,
-          "valueValidators": [
-            {
-              "type": "NON_EMPTY"
-            }
-          ]
-        },
-        "isUnique": true
+        "type": "TEXT",
+        "name": "404Title",
+        "displayName": "404 Page Title",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "404Tracking",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ]
       }
     ],
-    "newRowButtonText": "Add Custom Property"
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "init",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "revenueOptions",
+    "displayName": "Revenue Tracking",
+    "groupStyle": "NO_ZIPPY",
+    "subParams": [
+      {
+        "type": "CHECKBOX",
+        "name": "revenueEnabled",
+        "checkboxText": "Enable Revenue Tracking",
+        "simpleValueType": true,
+        "defaultValue": false
+      },
+      {
+        "type": "TEXT",
+        "name": "revenueCurrency",
+        "displayName": "Currency",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "revenueEnabled",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "revenueAmount",
+        "displayName": "Amount",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "revenueEnabled",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
+      }
+    ],
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "event",
+        "type": "EQUALS"
+      }
+    ]
   },
   {
     "type": "GROUP",
     "name": "options",
     "displayName": "Options",
-    "groupStyle": "ZIPPY_CLOSED",
+    "groupStyle": "NO_ZIPPY",
     "subParams": [
       {
         "type": "CHECKBOX",
@@ -88,7 +220,14 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "File Downloads",
         "simpleValueType": true,
         "defaultValue": true,
-        "help": "Whether to track file downloads. Defaults to true."
+        "help": "Whether to track file downloads. Defaults to true.",
+        "enablingConditions": [
+          {
+            "paramName": "type",
+            "paramValue": "init",
+            "type": "EQUALS"
+          }
+        ]
       },
       {
         "type": "CHECKBOX",
@@ -96,7 +235,14 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Form Submissions",
         "simpleValueType": true,
         "help": "Whether to track form submissions. Defaults to true.",
-        "defaultValue": true
+        "defaultValue": true,
+        "enablingConditions": [
+          {
+            "paramName": "type",
+            "paramValue": "init",
+            "type": "EQUALS"
+          }
+        ]
       },
       {
         "type": "CHECKBOX",
@@ -104,14 +250,28 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Outbound Links",
         "simpleValueType": true,
         "help": "Whether to track outbound link clicks. Defaults to true.",
-        "defaultValue": true
+        "defaultValue": true,
+        "enablingConditions": [
+          {
+            "paramName": "type",
+            "paramValue": "init",
+            "type": "EQUALS"
+          }
+        ]
       },
       {
         "type": "CHECKBOX",
         "name": "hashBasedRouting",
         "checkboxText": "Hash Based Routing",
         "simpleValueType": true,
-        "help": "Whether the page uses hash based routing. Defaults to false.  Read more at https://plausible.io/docs/hash-based-routing"
+        "help": "Whether the page uses hash based routing. Defaults to false.  Read more at https://plausible.io/docs/hash-based-routing",
+        "enablingConditions": [
+          {
+            "paramName": "type",
+            "paramValue": "init",
+            "type": "EQUALS"
+          }
+        ]
       },
       {
         "type": "GROUP",
@@ -125,14 +285,28 @@ ___TEMPLATE_PARAMETERS___
             "checkboxText": "Auto Capture Pageviews",
             "simpleValueType": true,
             "help": "Whether to automatically capture pageviews. Defaults to true.",
-            "defaultValue": true
+            "defaultValue": true,
+            "enablingConditions": [
+              {
+                "paramName": "type",
+                "paramValue": "init",
+                "type": "EQUALS"
+              }
+            ]
           },
           {
             "type": "CHECKBOX",
             "name": "captureOnLocalhost",
             "checkboxText": "Capture on Localhost",
             "simpleValueType": true,
-            "help": "Whether to capture events on localhost. Defaults to false."
+            "help": "Whether to capture events on localhost. Defaults to false.",
+            "enablingConditions": [
+              {
+                "paramName": "type",
+                "paramValue": "init",
+                "type": "EQUALS"
+              }
+            ]
           },
           {
             "type": "CHECKBOX",
@@ -140,9 +314,88 @@ ___TEMPLATE_PARAMETERS___
             "checkboxText": "Logging",
             "simpleValueType": true,
             "help": "Whether to log to console on ignored events. Defaults to true.",
+            "defaultValue": true,
+            "enablingConditions": [
+              {
+                "paramName": "type",
+                "paramValue": "init",
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "interactiveEvent",
+            "checkboxText": "Interactive",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "type",
+                "paramValue": "event",
+                "type": "EQUALS"
+              }
+            ],
             "defaultValue": true
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "enableFileDownloadTypes",
+            "checkboxText": "Custom File Download Types",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "fileDownloads",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ],
+            "help": "Override the default file extensions for tracking file downloads, so only your custom file type downloads will be tracked instead.",
+            "defaultValue": false
+          },
+          {
+            "type": "SIMPLE_TABLE",
+            "name": "fileDownloadTypes",
+            "simpleTableColumns": [
+              {
+                "defaultValue": "",
+                "displayName": "Custom File Download Types",
+                "name": "fileDownloadType",
+                "type": "TEXT",
+                "valueValidators": [
+                  {
+                    "type": "REGEX",
+                    "args": [
+                      "^[a-z0-9_]*$"
+                    ],
+                    "errorMessage": "Please enter a valid file extension in lower-case without the leading dot.  (For example: pdf instead of .pdf or PDF)",
+                    "enablingConditions": [
+                      {
+                        "paramName": "enableFileDownloadTypes",
+                        "paramValue": true,
+                        "type": "EQUALS"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "NON_EMPTY"
+                  }
+                ],
+                "isUnique": true,
+                "valueHint": "Enter a valid file extension in lower-case without the leading dot.  (For example: pdf instead of .pdf or PDF)"
+              }
+            ],
+            "enablingConditions": [
+              {
+                "paramName": "enableFileDownloadTypes",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ],
+            "valueValidators": [],
+            "newRowButtonText": "Add File Download Type"
           }
-        ]
+        ],
+        "enablingConditions": []
       }
     ]
   }
@@ -159,6 +412,26 @@ const encodeUri = require('encodeUri');
 const injectScript = require('injectScript');
 const log = require('logToConsole');
 const parseUrl = require('parseUrl');
+const readTitle = require('readTitle');
+
+// Check if plausible script already loaded
+const plausible = copyFromWindow('plausible');
+
+// Create a queue for plausible calls if script not loaded yet
+if (!plausible) {
+  createArgumentsQueue('plausible', 'plausible.q');
+}
+
+// Check for custom props and populate into object if available
+let customProps = null;
+if (data.customProps && data.customProps.length > 0) {
+  customProps = {};
+  data.customProps.forEach(customProp => {
+    if (customProp.customPropName && customProp.customPropValue) {
+      customProps[customProp.customPropName] = customProp.customPropValue;
+    }
+  });
+}
 
 const handleSuccess = () => {
   return data.gtmOnSuccess();
@@ -166,6 +439,9 @@ const handleSuccess = () => {
 
 const handleFail = (msg) => {
   let errorMessage = 'Failed to load Plausible Analytics GTM';
+  if (data.type === 'event') {
+    errorMessage = 'Plausible Analytics GTM Event Error';
+  }
   if (msg) {
     errorMessage = errorMessage + ": " +msg;
   }
@@ -173,12 +449,20 @@ const handleFail = (msg) => {
   return data.gtmOnFailure();
 };
 
-// Create a queue for plausible calls before the script loads
-createArgumentsQueue('plausible', 'plausible.q');
-
-// Check for Script ID
-if (!data.scriptID) {
-  return handleFail('No Script ID Provided');
+// If custom event, send event to Plausible and return successfully
+if (data.type === 'event') {
+  let eventProperties = {interactive: data.interactiveEvent};
+  if (customProps) {
+    eventProperties.props = customProps;
+  }
+  
+  //If revenue fields populated, add revenue amount and currency to event
+  if (data.revenueEnabled && data.revenueAmount && data.revenueCurrency) {
+    eventProperties.revenue = {amount: data.revenueAmount, currency: data.revenueCurrency};
+  }
+  
+  callInWindow("plausible", data.customEvent, eventProperties);
+  return handleSuccess();
 }
 
 let scriptID = data.scriptID;
@@ -186,7 +470,6 @@ let scriptID = data.scriptID;
 //auto-remove url prefix
 if (scriptID && scriptID.indexOf('http') === 0) {
   var url = parseUrl(scriptID);
-  log(url);
   if (url.hostname !== 'plausible.io' || url.pathname.indexOf('/js/') !== 0) {
     return handleFail('Invalid Script ID');
   }
@@ -203,9 +486,7 @@ if (scriptID && scriptID.length > 3 && scriptID.substring(scriptID.length - 3) =
   scriptID = scriptID.substring(0, scriptID.length - 3);
 }
 
-
 const scriptSRC = "https://plausible.io/js/" + encodeUri(scriptID) + ".js";
-const customProps = data.customProps;
 
 const plausibleInit = () => {
   let initProps = {
@@ -218,26 +499,37 @@ const plausibleInit = () => {
     outboundLinks: data.outboundLinks,
     lib: 'gtm'
   };
-
-  if (customProps && customProps.length > 0) {
-    initProps.customProperties = {};
-
-    customProps.forEach(customProp => {
-      initProps.customProperties[customProp.plausibleCustomProp] = customProp.gtmVariable;
-    });
+  
+  if (data.enableFileDownloadTypes && data.fileDownloadTypes && data.fileDownloadTypes.length > 0) {
+    initProps.fileDownloads = data.fileDownloadTypes.map(item => item.fileDownloadType);
   }
 
+  if (customProps) {
+    initProps.customProperties = customProps;
+  }
+  
   callInWindow('plausible.init', initProps);
+  
+  //check for 404 page title
+  if (data["404Tracking"] && data["404Title"]) {
+    const title = readTitle();
+    // if 404 page title matches current page title, send 404 event to Plausible
+    if (title === data["404Title"]) {
+      callInWindow("plausible", "404");
+    }
+  }
+  
+  //return script init successful
   return handleSuccess();
 };
 
-const plausible = copyFromWindow('plausible');
-if (!plausible || plausible.q) {
-  // plausible is not loaded, or is still the stub (has .q property)
-  injectScript(scriptSRC, plausibleInit, handleFail, 'plausible');
-} else {
-  // plausible is loaded
-  return handleSuccess();
+
+//if no data type selected (prior version of template) or if set to init, then check if script loaded
+if (!data.type || data.type === 'init') {
+  //if plausible is not loaded or is still the stub (has .q property), inject script
+  if (!plausible || plausible.q) {  
+    injectScript(scriptSRC, plausibleInit, handleFail, 'plausible');
+  }
 }
 
 
@@ -427,6 +719,16 @@ ___WEB_PERMISSIONS___
     },
     "clientAnnotations": {
       "isEditedByUser": true
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "read_title",
+        "versionId": "1"
+      },
+      "param": []
     },
     "isRequired": true
   }
