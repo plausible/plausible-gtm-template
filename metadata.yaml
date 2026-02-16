@@ -1,6 +1,8 @@
 homepage: "https://plausible.io"
 documentation: "https://plausible.io/gtm-template"
 versions:
+  - sha: 2765858020a7bafec5c2d4a704cacf712987fe50
+    changeNotes: Add custom event tag, add option to track 404 errors, allow specifying which downloaded file types to track
   - sha: 1867822ce5f423a645c9d283c5f159800056da83
     changeNotes: Move advanced options into nested dropdown
   - sha: ef96542a1ce11e1e6b46c106b8f5e248580f6078
